@@ -6,8 +6,8 @@
   "scripts": {
     "test": "eslint src && preact test",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
+    "build": "node ./node_modules/preact-cli/lib/index.js build",
+    "serve": "node ./node_modules/preact-cli/lib/index.js build && ./node_modules/preact-cli/lib/index.js serve",
     "dev": "preact watch"
   },
   "keywords": [],
