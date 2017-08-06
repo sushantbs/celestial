@@ -1468,6 +1468,7 @@ var Configurator = (_temp = _class = function (_Component) {
     _this.activate = _this.activate.bind(_this);
     _this.deactivate = _this.deactivate.bind(_this);
     _this.clear = _this.clear.bind(_this);
+    _this.reset = _this.reset.bind(_this);
     return _this;
   }
 
@@ -3330,11 +3331,13 @@ var Home = function (_Component) {
 
 	Home.prototype.resetPlanets = function resetPlanets() {
 		if (this._patternTimer) {
-			this.clearInterval(this._patternTimer);
+			clearInterval(this._patternTimer);
+			this._patternTimer = null;
 		}
 
 		if (this._frameTimer) {
-			this.clearInterval(this._frameTimer);
+			clearInterval(this._frameTimer);
+			this._frameTimer = null;
 		}
 
 		this.setState({

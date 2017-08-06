@@ -28,6 +28,7 @@ export default class Configurator extends Component {
     this.activate = this.activate.bind(this);
     this.deactivate = this.deactivate.bind(this);
     this.clear = this.clear.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   onIntervalSelect (e) {

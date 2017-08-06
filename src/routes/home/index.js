@@ -136,11 +136,13 @@ export default class Home extends Component {
 
 	resetPlanets () {
 		if (this._patternTimer) {
-			this.clearInterval(this._patternTimer);
+			clearInterval(this._patternTimer);
+			this._patternTimer = null;
 		}
 
 		if (this._frameTimer) {
-			this.clearInterval(this._frameTimer);
+			clearInterval(this._frameTimer);
+			this._frameTimer = null;
 		}
 
 		this.setState({
