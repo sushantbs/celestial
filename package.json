@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint src && preact test",
-    "start": "npm run -s serve",
-    "build": "if-env NODE_ENV=production && preact build",
-    "serve": "preact build && preact serve",
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "build": "preact build",
+    "serve": "preact build && node server.js",
     "dev": "preact watch"
   },
   "keywords": [],
@@ -21,11 +21,14 @@
     "eslint-config-synacor": "^1.0.1"
   },
   "dependencies": {
+    "express": "^4.15.3",
+    "if-env": "^1.0.0",
     "preact": "^8.2.1",
+    "preact-cli": "^1.4.1",
     "preact-compat": "^3.16.0",
     "preact-router": "^2.5.5",
     "react-d3-basic": "^1.6.11",
-    "preact-cli": "^1.4.1",
-    "if-env": "^1.0.0"
+    "serve-favicon": "^2.4.3",
+    "serve-static": "^1.12.4"
   }
 }
