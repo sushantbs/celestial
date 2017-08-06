@@ -6,9 +6,11 @@
   "scripts": {
     "test": "eslint src && preact test",
     "start": "npm run -s serve",
-    "build": "NODE_ENV=production node ./node_modules/preact-cli/lib/index.js build",
-    "serve": "NODE_ENV=production node ./node_modules/preact-cli/lib/index.js build && NODE_ENV=production node ./node_modules/preact-cli/lib/index.js serve",
-    "dev": "preact watch"
+    "build": "if-env NODE_ENV=production && preact build",
+    "serve": "node ./node_modules/preact-cli/lib/index.js build && node ./node_modules/preact-cli/lib/index.js serve",
+    "dev": "preact watch",
+    "preact-cli": "^1.4.1",
+    "if-env": "^1.0.0"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +20,7 @@
   },
   "devDependencies": {
     "eslint": "^4.3.0",
-    "eslint-config-synacor": "^1.0.1",
-    "if-env": "^1.0.0",
-    "preact-cli": "^1.4.1"
+    "eslint-config-synacor": "^1.0.1"
   },
   "dependencies": {
     "preact": "^8.2.1",
