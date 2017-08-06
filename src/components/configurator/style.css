@@ -1,0 +1,29 @@
+.configrator {
+  display: block;
+}
+
+.configurator input[type="button"] {
+  padding: 4px 8px;
+  color: blue;
+  border-width: 0;
+  background-color: transparent;
+  margin: 3px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.configurator input[active=true] {
+  background-color: blue;
+  color: #e5e5e5;
+}
+
+.configurator input[disabled] {
+  color: #6e6e6e;
+}
+
+.configurator .buttons input[type="button"] {
+  font-size: 16px;
+  background-color: orange;
+  color: #3e3e3e;
+}
