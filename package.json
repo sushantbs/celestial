@@ -7,10 +7,8 @@
     "test": "eslint src && preact test",
     "start": "npm run -s serve",
     "build": "if-env NODE_ENV=production && preact build",
-    "serve": "node ./node_modules/preact-cli/lib/index.js build && node ./node_modules/preact-cli/lib/index.js serve",
-    "dev": "preact watch",
-    "preact-cli": "^1.4.1",
-    "if-env": "^1.0.0"
+    "serve": "preact build && preact serve",
+    "dev": "preact watch"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +24,8 @@
     "preact": "^8.2.1",
     "preact-compat": "^3.16.0",
     "preact-router": "^2.5.5",
-    "react-d3-basic": "^1.6.11"
+    "react-d3-basic": "^1.6.11",
+    "preact-cli": "^1.4.1",
+    "if-env": "^1.0.0"
   }
 }
