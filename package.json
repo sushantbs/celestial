@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint src && preact test",
-    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "node ./node_modules/preact-cli/lib/index.js build",
-    "serve": "node ./node_modules/preact-cli/lib/index.js build && ./node_modules/preact-cli/lib/index.js serve",
+    "start": "npm run -s serve",
+    "build": "NODE_ENV=production node ./node_modules/preact-cli/lib/index.js build",
+    "serve": "NODE_ENV=production node ./node_modules/preact-cli/lib/index.js build && NODE_ENV=production node ./node_modules/preact-cli/lib/index.js serve",
     "dev": "preact watch"
   },
   "keywords": [],
