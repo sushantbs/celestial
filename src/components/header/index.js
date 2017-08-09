@@ -12,7 +12,7 @@ export default class Header extends Component {
 		return (
 			<header class={style.header}>
 				<h2>Celestial Patterns</h2>
-				<input type='button' value='Export Pattern' onClick={this.onExportClick} />
+				<input class={style.normal} type='button' value='Export Pattern' onClick={this.onExportClick} />
 			</header>
 		);
 	}

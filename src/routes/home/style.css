@@ -9,25 +9,45 @@
 	min-height: 100%;
 	width: 100%;
 	position: relative;
-}
-
-canvas {
-	position: absolute;
-	width: 440px;
-	height: 440px;
-	left: calc(50% - 220px);
-	top: calc(50% - 220px);
+	background-color: #fff;
 }
 
 .configuration {
 	position: absolute;
 	right: 0;
 	top: 0;
-	padding-top: 80px;
-	padding-left: 10px;
+	padding: 80px 10px 10px;
 	bottom: 0;
 	min-width: 250px;
 	background-color: #e6e6e6;
+}
+
+.solarsystem {
+	position: absolute;
+	top: 50px;
+	left: 0;
+	right: 250px;
+	bottom: 0;
+}
+
+.buttons {
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 65px;
+	background-color: orange;
+	color: #3e3e3e;
+	border-width: 0;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+canvas {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .sun {
@@ -35,6 +55,10 @@ canvas {
 	height: 20px;
 	border-radius: 50%;
 	background-color: orange;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
 }
 
 .orbit {
@@ -45,85 +69,97 @@ canvas {
 	transform: translate(-50%, -50%);
 }
 
+.orbit.mercury {
+	border: 1px solid cyan;
+}
+
 .orbit.venus {
-	width: 120px;
-	height: 120px;
 	border: 1px solid green;
 }
 
 .orbit.earth {
-	width: 200px;
-	height: 200px;
 	border: 1px solid blue;
 }
 
 .orbit.mars {
-	width: 300px;
-	height: 300px;
 	border: 1px solid red;
 }
 
 .orbit.jupiter {
-	width: 440px;
-	height: 440px;
 	border: 1px solid brown;
+}
+
+.orbit.saturn {
+	border: 1px solid teal;
 }
 
 .planet {
 	position: absolute;
 	border-radius: 50%;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.planet.mercury {
+	width: 6px;
+	height: 6px;
+	background-color: cyan;
 }
 
 .planet.venus {
-	top: 0;
-	left: 50%;
-	margin-left: -4px;
-	margin-top: -4px;
 	width: 8px;
 	height: 8px;
 	background-color: green;
 }
 
 .planet.earth {
-	top: 0;
-	left: 50%;
-	margin-left: -5px;
-	margin-top: -5px;
 	width: 10px;
 	height: 10px;
 	background-color: blue;
 }
 
 .planet.mars {
-	top: 0;
-	left: 50%;
-	margin-left: -8px;
-	margin-top: -8px;
 	width: 16px;
 	height: 16px;
 	background-color: red;
 }
 
 .planet.jupiter {
-	top: 0;
-	left: 50%;
-	margin-left: -11px;
-	margin-top: -11px;
 	width: 22px;
 	height: 22px;
 	background-color: brown;
 }
 
+.planet.saturn {
+	width: 20px;
+	height: 20px;
+	background-color: teal;
+}
+
 @media (max-width:600px) {
 
+	.home {
+		padding: 20px 0;
+	}
+
+	.solarsystem {
+		transform: scale(0.7);
+		bottom: 20px;
+		height: 460px;
+		right: 0;
+		top: 0;
+		position: relative;
+	}
 
 	.configuration {
-		position: absolute;
-		right: 0;
-		left: 0;
-		bottom: auto;
-		top: 600px;
+		position: relative;
+		padding-top: 10px;
 		min-width: 250px;
 		background-color: #e6e6e6;
+	}
+
+	.buttons {
+		display: block;
 	}
 }

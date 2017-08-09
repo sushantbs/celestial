@@ -4,8 +4,8 @@ import style from './style';
 export default class Configurator extends Component {
 
   static defaultProps = {
-    frequencies: [1, 2, 3, 5, 9, 12],
-    planets: ['Venus', 'Earth', 'Mars', 'Jupiter'],
+    frequencies: [1, 2, 3, 6, 9, 12],
+    planets: ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn'],
     colors: ['Red', 'Blue', 'Yellow', 'Green']
   }
 
@@ -120,6 +120,9 @@ export default class Configurator extends Component {
               onClick={this.onColorSelect}
               active={(this.state.selectedColor === color)} />)
           )}
+        </div>
+        <div class={style.playa}>
+          <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/343932112&amp;color=ff9900&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
         </div>
       </div>
     )

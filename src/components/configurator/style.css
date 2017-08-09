@@ -2,6 +2,10 @@
   display: block;
 }
 
+.configurator .buttons {
+  display: flex;
+}
+
 .configurator input[type="button"] {
   padding: 4px 8px;
   color: blue;
@@ -26,4 +30,17 @@
   font-size: 16px;
   background-color: orange;
   color: #3e3e3e;
+  flex-grow: 1;
+}
+
+.configurator .playa {
+  position: absolute;
+  bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .configurator .playa {
+    position: relative;
+    margin-top: 20px;
+  }
 }

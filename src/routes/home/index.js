@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import style from './style';
 import Configurator from '../../components/configurator';
-import Chart from 'react-d3-basic';
 
 export default class Home extends Component {
 
@@ -36,14 +35,19 @@ export default class Home extends Component {
 		jupiterTheta: 270,
 		jupiterX: 0,
 		jupiterY: 0,
-		jupiterRadius: 220,
+		jupiterRadius: 200,
+
+		saturnTick: 0.6,
+		saturnTheta: 270,
+		saturnX: 0,
+		saturnY: 0,
+		saturnRadius: 250,
 
 		patternSource: 'earth',
 		patternTarget: 'jupiter',
 		lines: [],
 
-		width: 440,
-		height: 440
+		systemRadius: 300
 	}
 
 	_getCoords (theta, radius) {
@@ -56,26 +60,35 @@ export default class Home extends Component {
 	_frame() {
 
 		let {
+			mercuryTheta,
+			mercuryTick,
+
 			venusTheta,
 			venusTick,
-			venusRadius,
+
 			earthTheta,
 			earthTick,
+
 			marsTheta,
 			marsTick,
+
 			jupiterTheta,
 			jupiterTick,
-			jupiterRadius
+
+			saturnTheta,
+			saturnTick
 
 		} = this.state;
 
 		let factor = 4;
 
 		this.setState({
+			mercuryTheta: mercuryTheta + (mercuryTick / factor),
 			venusTheta: venusTheta + (venusTick / factor),
 			earthTheta: earthTheta + (earthTick / factor),
 			marsTheta: marsTheta + (marsTick / factor),
-			jupiterTheta: jupiterTheta + (jupiterTick / factor)
+			jupiterTheta: jupiterTheta + (jupiterTick / factor),
+			saturnTheta: saturnTheta + (saturnTick / factor)
 		});
 	}
 
@@ -87,8 +100,8 @@ export default class Home extends Component {
 		let p1 = this.state.patternSource;
 		let p2 = this.state.patternTarget;
 
-		let p1Offset = 220.5 - this.state[`${p1}Radius`];
-		let p2Offset = 220.5 - this.state[`${p2}Radius`];
+		let p1Offset = (this.state.systemRadius + 0.5) - this.state[`${p1}Radius`];
+		let p2Offset = (this.state.systemRadius + 0.5) - this.state[`${p2}Radius`];
 
 		let p1Point = this._getCoords(this.state[`${p1}Theta`], this.state[`${p1}Radius`]);
 		let p2Point = this._getCoords(this.state[`${p2}Theta`], this.state[`${p2}Radius`]);
@@ -157,60 +170,89 @@ export default class Home extends Component {
 
 	componentWillReceiveProps(props) {
 		if (props.snapshot) {
-			if (this.canvas && this.hiddenLink) {
-				let dataURI = this.canvas.toDataURL('png');
-				this.hiddenLink.href = dataURI;
-				this.hiddenLink.click();
-
-				route("/");
-			}
+			this.exportAsPNG();
+			route("/");
 		}
 	}
 
 	componentDidMount() {
 		this._canvasContext = this.canvas.getContext('2d');
-		this.canvas.width = this.state.width;
-		this.canvas.height = this.state.height;
+		this.canvas.width = this.state.systemRadius * 2;
+		this.canvas.height = this.state.systemRadius * 2;
 	}
 
-
+	exportAsPNG() {
+		if (this.canvas && this.hiddenLink) {
+			let dataURI = this.canvas.toDataURL('png');
+			this.hiddenLink.href = dataURI;
+			this.hiddenLink.click();
+		}
+	}
 
 	render() {
 
-		let venusCoords = this._getCoords(this.state.venusTheta, this.state.venusRadius);
-		let earthCoords = this._getCoords(this.state.earthTheta, this.state.earthRadius);
-		let marsCoords = this._getCoords(this.state.marsTheta, this.state.marsRadius);
-		let jupiterCoords = this._getCoords(this.state.jupiterTheta, this.state.jupiterRadius);
+		let {
+			mercuryRadius,
+			venusRadius,
+			earthRadius,
+			marsRadius,
+			jupiterRadius,
+			saturnRadius
+		} = this.state;
+
+		let mercuryCoords = this._getCoords(this.state.mercuryTheta, mercuryRadius);
+		let venusCoords = this._getCoords(this.state.venusTheta, venusRadius);
+		let earthCoords = this._getCoords(this.state.earthTheta, earthRadius);
+		let marsCoords = this._getCoords(this.state.marsTheta, marsRadius);
+		let jupiterCoords = this._getCoords(this.state.jupiterTheta, jupiterRadius);
+		let saturnCoords = this._getCoords(this.state.saturnTheta, saturnRadius);
 
 		return (
-			<div class={`${style.home} ${style.centerboth}`}>
-				<canvas ref={canvas => (this.canvas = canvas)}></canvas>
-				<div onClick={this.toggle} class={`${style.orbit} ${style.venus} ${style.centerboth}`}>
-					<div
-						style={{left: venusCoords.x, top: venusCoords.y}}
-						class={`${style.planet} ${style.venus}`}>
-					</div>
+			<div class={`${style.home}`}>
+				<div class={style.buttons}>
+					<input class={style.small} type='button' value='Export' onClick={this.exportAsPNG.bind(this)} />
 				</div>
-				<div class={`${style.orbit} ${style.earth} ${style.centerboth}`}>
-					<div
-						style={{left: earthCoords.x, top: earthCoords.y}}
-						class={`${style.planet} ${style.earth}`}>
+				<div class={`${style.centerboth} ${style.solarsystem}`}>
+					<canvas ref={canvas => (this.canvas = canvas)}></canvas>
+					<div style={{width: mercuryRadius * 2, height: mercuryRadius * 2}} class={`${style.orbit} ${style.mercury} ${style.centerboth}`}>
+						<div
+							style={{left: mercuryCoords.x, top: mercuryCoords.y}}
+							class={`${style.planet} ${style.mercury}`}>
+						</div>
 					</div>
-				</div>
-				<div class={`${style.orbit} ${style.mars} ${style.centerboth}`}>
-					<div
-						style={{left: marsCoords.x, top: marsCoords.y}}
-						class={`${style.planet} ${style.mars}`}>
+					<div style={{width: venusRadius * 2, height: venusRadius * 2}} class={`${style.orbit} ${style.venus} ${style.centerboth}`}>
+						<div
+							style={{left: venusCoords.x, top: venusCoords.y}}
+							class={`${style.planet} ${style.venus}`}>
+						</div>
 					</div>
-				</div>
-				<div class={`${style.orbit} ${style.jupiter} ${style.centerboth}`}>
-					<div
-						style={{left: jupiterCoords.x, top: jupiterCoords.y}}
-						class={`${style.planet} ${style.jupiter}`}>
+					<div style={{width: earthRadius * 2, height: earthRadius * 2}} class={`${style.orbit} ${style.earth} ${style.centerboth}`}>
+						<div
+							style={{left: earthCoords.x, top: earthCoords.y}}
+							class={`${style.planet} ${style.earth}`}>
+						</div>
 					</div>
+					<div style={{width: marsRadius * 2, height: marsRadius * 2}} class={`${style.orbit} ${style.mars} ${style.centerboth}`}>
+						<div
+							style={{left: marsCoords.x, top: marsCoords.y}}
+							class={`${style.planet} ${style.mars}`}>
+						</div>
+					</div>
+					<div style={{width: jupiterRadius * 2, height: jupiterRadius * 2}} class={`${style.orbit} ${style.jupiter} ${style.centerboth}`}>
+						<div
+							style={{left: jupiterCoords.x, top: jupiterCoords.y}}
+							class={`${style.planet} ${style.jupiter}`}>
+						</div>
+					</div>
+					<div style={{width: saturnRadius * 2, height: saturnRadius * 2}} class={`${style.orbit} ${style.saturn} ${style.centerboth}`}>
+						<div
+							style={{left: saturnCoords.x, top: saturnCoords.y}}
+							class={`${style.planet} ${style.saturn}`}>
+						</div>
+					</div>
+					<div class={style.sun}></div>
+					<a ref={hiddenLink => (this.hiddenLink = hiddenLink)} href="#" style="display:none" download="pattern">Download</a>
 				</div>
-				<div class={style.sun}></div>
-				<a ref={hiddenLink => (this.hiddenLink = hiddenLink)} href="#" style="display:none" download="pattern">Download</a>
 				<div class={style.configuration}>
 					<Configurator layout="auto" start={this.startPattern.bind(this)} stop={this.stopPattern.bind(this)} reset={this.resetPlanets.bind(this)} clear={this.clearPattern.bind(this)} />
 				</div>

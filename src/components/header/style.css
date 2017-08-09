@@ -14,15 +14,23 @@
 	align-items: center;
 }
 
-.header input {
+.header .normal {
 	position: absolute;
 	right: 20px;
-	padding: 6px 8px;
+	padding: 6px 12px;
 	background-color: orange;
 	color: #3e3e3e;
 	font-size: 18px;
-	border: 1px solid #6e6e6e;
+	border-width: 0;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 	border-radius: 4px;
 	cursor: pointer;
 	top: 10px;
+	display: inline-block;
+}
+
+@media (max-width: 600px) {
+	.header .normal {
+		display: none;
+	}
 }
