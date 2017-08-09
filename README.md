@@ -1,2 +1,3 @@
 # celestial
-A tiny preact app 
+A tiny preact app
+Check it out at https://celestialpatterns.herokuapp.com
