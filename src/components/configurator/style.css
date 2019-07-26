@@ -1,5 +1,7 @@
-.configrator {
-  display: block;
+.configurator {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
 }
 
 .configurator .buttons {
@@ -17,7 +19,7 @@
   outline: none;
 }
 
-.configurator input[active=true] {
+.configurator input[active="true"] {
   background-color: blue;
   color: #e5e5e5;
 }
@@ -36,6 +38,24 @@
 .configurator .playa {
   position: absolute;
   bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.configurator .export {
+  position: absolute;
+  right: 20px;
+  width: calc(100% - 40px);
+  padding: 6px 12px;
+  background-color: orange;
+  color: #3e3e3e;
+  font-size: 18px;
+  border-width: 0;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  cursor: pointer;
+  bottom: 10px;
+  display: inline-block;
 }
 
 @media (max-width: 600px) {

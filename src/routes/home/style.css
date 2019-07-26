@@ -1,165 +1,602 @@
 .centerboth {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home {
-	padding: 56px 20px;
-	min-height: 100%;
-	width: 100%;
-	position: relative;
-	background-color: #fff;
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
 }
 
 .configuration {
-	position: absolute;
-	right: 0;
-	top: 0;
-	padding: 80px 10px 10px;
-	bottom: 0;
-	min-width: 250px;
-	background-color: #e6e6e6;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 80px 10px 10px;
+  bottom: 0;
+  min-width: 250px;
+  background-color: #e6e6e6;
 }
 
 .solarsystem {
-	position: absolute;
-	top: 50px;
-	left: 0;
-	right: 250px;
-	bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 250px;
+  bottom: 0;
+  background-color: #000;
 }
 
 .buttons {
-	display: none;
-	position: absolute;
-	right: 5px;
-	top: 65px;
-	background-color: orange;
-	color: #3e3e3e;
-	border-width: 0;
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-	border-radius: 4px;
-	cursor: pointer;
+  display: none;
+  position: absolute;
+  right: 5px;
+  top: 65px;
+  background-color: orange;
+  color: #3e3e3e;
+  border-width: 0;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 canvas {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .sun {
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	background-color: orange;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: orange;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
 }
 
 .orbit {
-	border-radius: 50%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .orbit.mercury {
-	border: 1px solid cyan;
+  border: 1px solid cyan;
 }
 
 .orbit.venus {
-	border: 1px solid green;
+  border: 1px solid green;
 }
 
 .orbit.earth {
-	border: 1px solid blue;
+  border: 1px solid blue;
 }
 
 .orbit.mars {
-	border: 1px solid red;
+  border: 1px solid red;
 }
 
 .orbit.jupiter {
-	border: 1px solid brown;
+  border: 1px solid brown;
 }
 
 .orbit.saturn {
-	border: 1px solid teal;
+  border: 1px solid teal;
 }
 
 .planet {
-	position: absolute;
-	border-radius: 50%;
-	top: 0;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .planet.mercury {
-	width: 6px;
-	height: 6px;
-	background-color: cyan;
+  width: 6px;
+  height: 6px;
+  background-color: cyan;
 }
 
 .planet.venus {
-	width: 8px;
-	height: 8px;
-	background-color: green;
+  width: 8px;
+  height: 8px;
+  background-color: green;
 }
 
 .planet.earth {
-	width: 10px;
-	height: 10px;
-	background-color: blue;
+  width: 10px;
+  height: 10px;
+  background-color: blue;
 }
 
 .planet.mars {
-	width: 16px;
-	height: 16px;
-	background-color: red;
+  width: 16px;
+  height: 16px;
+  background-color: red;
 }
 
 .planet.jupiter {
-	width: 22px;
-	height: 22px;
-	background-color: brown;
+  width: 22px;
+  height: 22px;
+  background-color: brown;
 }
 
 .planet.saturn {
-	width: 20px;
-	height: 20px;
-	background-color: teal;
+  width: 20px;
+  height: 20px;
+  background-color: teal;
 }
 
-@media (max-width:600px) {
+.starlayer {
+  position: absolute;
+  background-color: transparent;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
 
-	.home {
-		padding: 20px 0;
-	}
+.star {
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  background-color: white;
+  position: absolute;
+  animation-duration: 10s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
 
-	.solarsystem {
-		transform: scale(0.7);
-		bottom: 20px;
-		height: 460px;
-		right: 0;
-		top: 0;
-		position: relative;
-	}
+.starmotion1 {
+  animation-name: starmotion1;
+}
 
-	.configuration {
-		position: relative;
-		padding-top: 10px;
-		min-width: 250px;
-		background-color: #e6e6e6;
-	}
+.starmotion2 {
+  animation-name: starmotion2;
+}
 
-	.buttons {
-		display: block;
-	}
+.starmotion3 {
+  animation-name: starmotion3;
+}
+
+.starmotion4 {
+  animation-name: starmotion4;
+}
+
+.starmotion5 {
+  animation-name: starmotion5;
+}
+
+.starmotion6 {
+  animation-name: starmotion6;
+}
+
+.starmotion7 {
+  animation-name: starmotion7;
+}
+
+.starmotion8 {
+  animation-name: starmotion8;
+}
+
+.starmotion9 {
+  animation-name: starmotion9;
+}
+
+.starmotion10 {
+  animation-name: starmotion10;
+}
+
+.starmotion11 {
+  animation-name: starmotion11;
+}
+
+.starmotion12 {
+  animation-name: starmotion12;
+}
+
+.starmotion13 {
+  animation-name: starmotion13;
+}
+
+.starmotion14 {
+  animation-name: starmotion14;
+}
+
+.starmotion15 {
+  animation-name: starmotion15;
+}
+
+.starmotion16 {
+  animation-name: starmotion16;
+}
+
+.starmotion17 {
+  animation-name: starmotion17;
+}
+
+.starmotion18 {
+  animation-name: starmotion18;
+}
+
+.starmotion19 {
+  animation-name: starmotion19;
+}
+
+.starmotion20 {
+  animation-name: starmotion20;
+}
+
+.starmotion21 {
+  animation-name: starmotion21;
+}
+
+.starmotion22 {
+  animation-name: starmotion22;
+}
+
+.starmotion23 {
+  animation-name: starmotion23;
+}
+
+.starmotion24 {
+  animation-name: starmotion24;
+}
+
+.starmotion25 {
+  animation-name: starmotion25;
+}
+
+.starmotion26 {
+  animation-name: starmotion26;
+}
+
+.starmotion27 {
+  animation-name: starmotion27;
+}
+
+.starmotion28 {
+  animation-name: starmotion28;
+}
+
+.starmotion29 {
+  animation-name: starmotion29;
+}
+
+.starmotion30 {
+  animation-name: starmotion30;
+}
+
+.starmotion31 {
+  animation-name: starmotion31;
+}
+
+.starmotion32 {
+  animation-name: starmotion32;
+}
+
+@keyframes starmotion1 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(0, -400px);
+  }
+}
+
+@keyframes starmotion2 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(100px, -400px);
+  }
+}
+@keyframes starmotion3 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(200px, -400px);
+  }
+}
+@keyframes starmotion4 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(300px, -400px);
+  }
+}
+@keyframes starmotion5 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, -400px);
+  }
+}
+@keyframes starmotion6 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, -300px);
+  }
+}
+@keyframes starmotion7 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, -200px);
+  }
+}
+@keyframes starmotion8 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, -100px);
+  }
+}
+@keyframes starmotion9 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, 0);
+  }
+}
+@keyframes starmotion10 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, 100px);
+  }
+}
+@keyframes starmotion11 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, 200px);
+  }
+}
+@keyframes starmotion12 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, 300px);
+  }
+}
+@keyframes starmotion13 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(400px, 400px);
+  }
+}
+@keyframes starmotion14 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(300px, 400px);
+  }
+}
+@keyframes starmotion15 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(200px, 400px);
+  }
+}
+@keyframes starmotion16 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(100px, 400px);
+  }
+}
+@keyframes starmotion17 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(0, 400px);
+  }
+}
+@keyframes starmotion18 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-100px, 400px);
+  }
+}
+@keyframes starmotion19 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-200px, 400px);
+  }
+}
+@keyframes starmotion20 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-300px, 400px);
+  }
+}
+@keyframes starmotion21 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, 400px);
+  }
+}
+@keyframes starmotion22 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, 300px);
+  }
+}
+@keyframes starmotion23 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, 200px);
+  }
+}
+@keyframes starmotion24 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, 100px);
+  }
+}
+@keyframes starmotion25 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, 0);
+  }
+}
+@keyframes starmotion26 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, -100px);
+  }
+}
+@keyframes starmotion27 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, -200px);
+  }
+}
+@keyframes starmotion28 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, -300px);
+  }
+}
+@keyframes starmotion29 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-400px, -400px);
+  }
+}
+@keyframes starmotion30 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-300px, -400px);
+  }
+}
+@keyframes starmotion31 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-200px, -400px);
+  }
+}
+@keyframes starmotion32 {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(-100px, -400px);
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    padding: 20px 0;
+  }
+
+  .solarsystem {
+    transform: scale(0.7);
+    bottom: 20px;
+    height: 460px;
+    right: 0;
+    top: 0;
+    position: relative;
+  }
+
+  .configuration {
+    position: relative;
+    padding-top: 10px;
+    min-width: 250px;
+    background-color: #e6e6e6;
+  }
+
+  .buttons {
+    display: block;
+  }
 }
