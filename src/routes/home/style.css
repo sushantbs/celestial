@@ -15,9 +15,10 @@
   position: absolute;
   right: 0;
   top: 0;
-  padding: 80px 10px 10px;
+  padding: 40px 10px 10px;
   bottom: 0;
   min-width: 250px;
+  max-width: 400px;
   background-color: #e6e6e6;
 }
 
@@ -140,10 +141,13 @@ canvas {
 .starlayer {
   position: absolute;
   background-color: transparent;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
+  left: -2000px;
+  right: -2000px;
+  bottom: -2000px;
+  top: -2000px;
+  animation-duration: 200s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 .star {
@@ -152,9 +156,11 @@ canvas {
   height: 1px;
   background-color: white;
   position: absolute;
-  animation-duration: 10s;
-  animation-timing-function: ease-out;
-  animation-iteration-count: infinite;
+}
+
+.starmotionrotate {
+  animation-name: starmotionrotate;
+  transform-origin: 1900px center;
 }
 
 .starmotion1 {
@@ -283,6 +289,16 @@ canvas {
 
 .starmotion32 {
   animation-name: starmotion32;
+}
+
+@keyframes starmotionrotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes starmotion1 {

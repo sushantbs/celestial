@@ -35,6 +35,10 @@
   flex-grow: 1;
 }
 
+.configurator .buttons input[type="button"]:disabled {
+  background-color: #999;
+}
+
 .configurator .playa {
   position: absolute;
   bottom: 0;

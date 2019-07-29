@@ -44,9 +44,11 @@ export default class Home extends Component {
     patternSource: "earth",
     patternTarget: "jupiter",
     lines: [],
+    orbits: [],
 
     systemRadius: 300,
     starCount: 100,
+    starPositions: [],
     spaceHeight: 0,
     spaceWidth: 0
   };
@@ -63,17 +65,8 @@ export default class Home extends Component {
       return null;
     }
 
-    const starMotion = `starmotion${Math.ceil(Math.random() * 32)}`;
-    return Array.from(new Array(this.state.starCount * 20)).map(starPos => {
-      return (
-        <div
-          class={`${style.star} ${style[starMotion]}`}
-          style={{
-            left: this.state.spaceWidth * Math.random() * 5,
-            top: this.state.spaceHeight * Math.random() * 5
-          }}
-        />
-      );
+    return this.state.starPositions.map(starPos => {
+      return <div class={`${style.star}`} style={{ ...starPos }} />;
     });
   }
 
@@ -142,7 +135,7 @@ export default class Home extends Component {
 
   startPattern(selectedPlanets, selectedInterval, selectedColor) {
     if (!this._frameTimer) {
-      this._frameTimer = setInterval(() => this._frame(), 25);
+      this._frameTimer = setInterval(() => this._frame(), 10);
     }
 
     this.stopPattern();
@@ -151,7 +144,32 @@ export default class Home extends Component {
     this.state.patternTarget = selectedPlanets[1].toLowerCase();
 
     this._canvasContext.strokeStyle = selectedColor.toLowerCase();
-    this._canvasContext.lineWidth = 0.8;
+    this._canvasContext.lineWidth = 1;
+
+    this._canvasContext.beginPath();
+    this._canvasContext.arc(
+      this.canvas.clientHeight / 2,
+      this.canvas.clientWidth / 2,
+      this.state[`${this.state.patternSource}Radius`],
+      0,
+      Math.PI * 2,
+      true
+    );
+    this._canvasContext.stroke();
+    this._canvasContext.closePath();
+
+    this._canvasContext.beginPath();
+    this._canvasContext.arc(
+      this.canvas.clientHeight / 2,
+      this.canvas.clientWidth / 2,
+      this.state[`${this.state.patternTarget}Radius`],
+      0,
+      Math.PI * 2,
+      true
+    );
+    this._canvasContext.stroke();
+    this._canvasContext.closePath();
+
     this._patternTimer = setInterval(
       () => this._snapshot(),
       Number(selectedInterval) * 1000
@@ -201,9 +219,16 @@ export default class Home extends Component {
     this._canvasContext = this.canvas.getContext("2d");
     this.canvas.width = this.state.systemRadius * 2;
     this.canvas.height = this.state.systemRadius * 2;
+
     this.setState({
       spaceHeight: this.spaceRef.clientHeight,
-      spaceWidth: this.spaceRef.clientWidth
+      spaceWidth: this.spaceRef.clientWidth,
+      starPositions: Array.from(new Array(this.state.starCount * 50)).map(
+        star => ({
+          left: this.spaceRef.clientWidth * Math.random(),
+          top: this.spaceRef.clientHeight * Math.random()
+        })
+      )
     });
   }
 
@@ -242,12 +267,14 @@ export default class Home extends Component {
             onClick={this.exportAsPNG.bind(this)}
           />
         </div>
-        <div
-          ref={ref => (this.spaceRef = ref)}
-          class={`${style.centerboth} ${style.solarsystem}`}
-        >
+        <div class={`${style.centerboth} ${style.solarsystem}`}>
           <canvas ref={canvas => (this.canvas = canvas)} />
-          <div class={style.starlayer}>{this._generateStars()}</div>
+          <div
+            ref={ref => (this.spaceRef = ref)}
+            class={`${style.starlayer} ${style.starmotionrotate}`}
+          >
+            {this._generateStars()}
+          </div>
           <div
             style={{ width: mercuryRadius * 2, height: mercuryRadius * 2 }}
             class={`${style.orbit} ${style.mercury} ${style.centerboth}`}

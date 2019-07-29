@@ -10,9 +10,7 @@ export default class Configurator extends Component {
   };
 
   state = {
-    startDisabled: false,
-    stopDisabled: false,
-    clearDisabled: false,
+    enableButtons: false,
     selectedPlanets: [],
     selectedColor: null,
     selectedInterval: null
@@ -35,7 +33,11 @@ export default class Configurator extends Component {
     let targetValue = e.target.value;
 
     if (this.state.selectedInterval !== targetValue) {
-      this.setState({ selectedInterval: targetValue });
+      this.setState({
+        selectedInterval: targetValue,
+        enableButtons:
+          this.state.selectedPlanets.length === 2 && this.state.selectedColor
+      });
     }
   }
 
@@ -52,14 +54,24 @@ export default class Configurator extends Component {
       selectedPlanets = [];
     }
 
-    this.setState({ selectedPlanets });
+    this.setState({
+      selectedPlanets,
+      enableButtons:
+        selectedPlanets.length === 2 &&
+        this.state.selectedInterval &&
+        this.state.selectedColor
+    });
   }
 
   onColorSelect(e) {
     let targetValue = e.target.value;
 
     if (this.state.selectedColor !== targetValue) {
-      this.setState({ selectedColor: targetValue });
+      this.setState({
+        selectedColor: targetValue,
+        enableButtons:
+          this.state.selectedPlanets.length === 2 && this.state.selectedInterval
+      });
     }
   }
 
@@ -90,23 +102,24 @@ export default class Configurator extends Component {
   render() {
     return (
       <div class={style.configurator}>
+        <p>Select 2 planets, a color and the draw interval and click start</p>
         <div class={style.buttons}>
           <input
             type="button"
             value="Start"
-            disabled={this.state.startDisabled}
+            disabled={!this.state.enableButtons}
             onClick={this.activate}
           />
           <input
             type="button"
             value="Stop"
-            disabled={this.state.stopDisabled}
+            disabled={!this.state.enableButtons}
             onClick={this.deactivate}
           />
           <input
             type="button"
             value="Reset"
-            disabled={this.state.clearDisabled}
+            disabled={!this.state.enableButtons}
             onClick={this.reset}
           />
         </div>
