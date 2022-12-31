@@ -25,7 +25,7 @@
     "if-env": "^1.0.0",
     "material-design-icons": "^3.0.1",
     "preact": "^8.2.1",
-    "preact-cli": "^1.4.1",
+    "preact-cli": "^3.4.3",
     "preact-compat": "^3.17.0",
     "preact-router": "^2.5.5",
     "serve-favicon": "^2.4.3",
